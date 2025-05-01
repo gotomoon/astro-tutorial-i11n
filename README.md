@@ -12,13 +12,22 @@ This project is a biliangual website with Korean as the default language and Eng
 
 # Strengths of This i18n Implementation
 
-- Native URLs: Korean users see URLs in their own language, which is user-friendly and good for SEO.
-- Full content localization: Each language can have fully independent content.
+## Why is this better than Astro Official Internationalization Recipe?
+
+I believe this is the best possible experience for native users and the best implementation for SEO for following reasons.
+
+- User experience: Native users see URLs in their own language (native URL), which is more user-friendly
+- SEO
+  Native slugs can improve SEO for native search terms.
+- Customization:
+  This is a truly bilingual site with native experience for both languages, not just a translation of English slugs.
+- Full content localization: Each language can have fully independent content. This is very important because each native people notice subtle atmosphere of a page versus cookie cutter translation. This is crucial especially for marketing websites.
 - Dynamic routing: Works for both static and dynamic pages (tags, posts).
 - No external dependencies: Simple, maintainable, and easy to extend.
-
+- Astro Flexibility:
+  Astro’s file-based routing allows for this flexibility, even though the official recipe uses romanized slugs for simplicity and universality.
 - Lanuage switcher that just works
-- Localized slugs (Localized URLs): users see URLs in their own language, which is user-friendly and maximizes SEO
+- Localized slugs (Localized URLs): users see URLs in their own language, which is user-friendly and maximizes SEO like the table below.
   (including Unicode handling of Chinese, Japanese, and Korean characters)
 
 | Language | URL                          |
@@ -33,33 +42,24 @@ This project is a biliangual website with Korean as the default language and Eng
 **Key Differences between Astro Official Recipe**
 | Aspect | Astro Official Recipe | This Project |
 |-----------------------|--------------------------------------|-------------------------------------|
-| Default language | At root, romanized/English slugs | At root, native Korean slugs |
+| Default language | At root, romanized/English slugs | At root, native language slugs |
 | Other languages | In subfolders (e.g., /en/, /fr/) | In /en/ subfolder |
-| Slug style | English/romanized | Native language (Korean) |
-| Navigation | English/romanized | Native for Korean, English for /en|
+| Slug style | English/romanized | Native language |
+| Navigation | English/romanized | Native (English for /en)|
 | Language switcher | Simple path swap | Path mapping, supports native slugs |
-| Dynamic routes | English/romanized | Native for Korean, English for /en|
-
-**Why Is this better?**
-
-- User Experience:
-  This approach is more user-friendly for native speakers, as URLs are in their native language.
-- SEO:
-  Native slugs can improve SEO for Korean search terms.
-- Customization:
-  I wanted a truly bilingual site with native experience for both languages, not just a translation of English slugs.
-- Astro Flexibility:
-  Astro’s file-based routing allows for this flexibility, even though the official recipe uses romanized slugs for simplicity and universality.
+| Dynamic routes | English/romanized | Native (English for /en)|
 
 **Summary Table of Implementation**
-| Feature | Korean (default) | English (secondary) |
-|------------------------|-------------------------|--------------------------|
-| Main pages | Native slugs (e.g., /홈) | /en/ subfolder |
-| Blog posts | /글/글-x.md | /en/posts/post-x.md |
-| Tag pages | /태그/인덱스, /태그/[tag] | /en/tags, /en/tags/[tag] |
-| Navigation | Korean links | English links |
-| Language switcher | Mapping logic | Mapping logic |
-| Layouts/components | Shared | Shared |
-| SEO/lang attribute | Dynamic | Dynamic |
+Use below as a reference to customize for your language.
+
+| Feature            | Korean (default)          | English (secondary)      |
+| ------------------ | ------------------------- | ------------------------ |
+| Main pages         | Native slugs (e.g., /홈)  | /en/ subfolder           |
+| Blog posts         | /글/글-x.md               | /en/posts/post-x.md      |
+| Tag pages          | /태그/인덱스, /태그/[tag] | /en/tags, /en/tags/[tag] |
+| Navigation         | Korean links              | English links            |
+| Language switcher  | Mapping logic             | Mapping logic            |
+| Layouts/components | Shared                    | Shared                   |
+| SEO/lang attribute | Dynamic                   | Dynamic                  |
 
 **DEMO: https://astro-tutorial-i11n.vercel.app/en/**
