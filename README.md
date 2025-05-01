@@ -1,171 +1,135 @@
-# Astro Internationalization Implementation on Astro Official Tutorial Blog Project
+# Astro i18n Blog Example
 
-This is an internationalization implementation of the Astro official tutorial.
+This project demonstrates how to build a multi-language blog with [Astro](https://astro.build/).
+It supports native URLs, a language switcher, and is easy to extend to new languages.
 
-- [Astro Tutorial](https://docs.astro.build/en/tutorial/0-introduction/)
-- [Astro Tutorial Code on GitHub](https://github.com/withastro/blog-tutorial-demo)
+This is a good starting template for general Astro website like corporate, blog, landing page, etc.
 
-If you have completed or are familiar with the official tutorial, this project will help you get started with internationalization quickly.
+I believe this is the best possible implementation of intenationalization for an Astro project for both native users and SEO.
 
 ---
 
-## Strengths of This i18n Implementation
+## 💡 Strengths of This i18n Implementation
 
-### Why is this better than the Astro Official Internationalization Recipe?
-
-I believe this approach provides the best possible experience for native users and the best implementation for SEO, for the following reasons:
+## (and Why This is Better then Astro Official Recipe)
 
 - **User Experience:**  
-  Native users see URLs in their own language (native URL), which is more user-friendly, as shown in the table below.  
-  (Including Unicode handling of Chinese, Japanese, and Korean characters.)
-
-| Language | URL                          |
-| -------- | ---------------------------- |
-| English  | `example.com/about`          |
-| Korean   | `example.com/소개`           |
-| Chinese  | `example.com/介绍`           |
-| Japanese | `example.com/紹介`           |
-| Spanish  | `example.com/sobre-nosotros` |
-| French   | `example.com/a-propos`       |
-
+  Native users see URLs in their own language (native URL), which is more user-friendly and SEO-friendly.
 - **SEO:**  
   Native slugs can improve SEO for native search terms.
-
 - **Customization:**  
-  This is a truly bilingual site with a native experience for both languages, not just a translation of English slugs.
-
-- **Full Content Localization:**  
-  Each language can have fully independent content. This is very important because native speakers notice subtle differences in the atmosphere of a page versus a cookie-cutter translation. This is crucial, especially for marketing websites.
-
+  Each language can have fully independent content and navigation, which is often crucial for marketing websites.
 - **Dynamic Routing:**  
   Works for both static and dynamic pages (tags, posts).
-
 - **No External Dependencies:**  
   Simple, maintainable, and easy to extend.
-
 - **Astro Flexibility:**  
-  Astro's file-based routing allows for this flexibility, even though the official recipe uses romanized slugs for simplicity and universality.
-
+  Astro's file-based routing allows for this flexibility.
 - **Language Switcher That Just Works**
 
 ---
 
-### Key Differences Between Astro Official Recipe and This Project
+## 🔎 Key Differences: Astro Official Recipe vs. This Project
 
-| Aspect            | Astro Official Recipe            | This Project                        |
-| ----------------- | -------------------------------- | ----------------------------------- |
-| Default language  | At root, romanized/English slugs | At root, native language slugs      |
-| Other languages   | In subfolders (e.g., /en/, /fr/) | In /en/ subfolder                   |
-| Slug style        | English/romanized                | Native language                     |
-| Navigation        | English/romanized                | Native (English for /en)            |
-| Language switcher | Simple path swap                 | Path mapping, supports native slugs |
-| Dynamic routes    | English/romanized                | Native (English for /en)            |
-
----
-
-### Summary Table of Implementation
-
-Use the table below as a reference to customize for your language.
-
-| Feature            | Korean (default)          | English (secondary)      |
-| ------------------ | ------------------------- | ------------------------ |
-| Main pages         | Native slugs (e.g., /홈)  | /en/ subfolder           |
-| Blog posts         | /글/글-x.md               | /en/posts/post-x.md      |
-| Tag pages          | /태그/인덱스, /태그/[tag] | /en/tags, /en/tags/[tag] |
-| Navigation         | Korean links              | English links            |
-| Language switcher  | Mapping logic             | Mapping logic            |
-| Layouts/components | Shared                    | Shared                   |
-| SEO/lang attribute | Dynamic                   | Dynamic                  |
+| Aspect            | Astro Official Recipe            | This Project                            |
+| ----------------- | -------------------------------- | --------------------------------------- |
+| Default language  | At root, romanized/English slugs | At root, native language slugs          |
+| Slug style        | English/romanized                | Native language                         |
+| Navigation        | English/romanized                | Native language                         |
+| Language switcher | Simple path swap                 | Path mapping, Flag images, Native slugs |
+| Dynamic routes    | English/romanized                | Native language                         |
 
 ---
-
-# Instruction
-
-To add a new language (e.g., Spanish, "es") to your Astro project, you only need to update a few configuration/code files after adding your new content under `/src/pages/es/`:
-
----
-
-### **1. `astro.config.mjs`**
-
-- Add the new language code to the `i18n.locales` array:
-  ```js
-  i18n: {
-    locales: ["en", "ko", "fr", "es"], // Add "es"
-    defaultLocale: "en",
-    routing: {
-      prefixDefaultLocale: true,
-    },
-  },
-  ```
-
----
-
-### **2. `src/components/Navigation.astro`**
-
-- **Add the new language to the `locales` array**:
-  ```js
-  const locales = [
-    { code: "en", label: "🇺🇸 English" },
-    { code: "ko", label: "🇰🇷 한국어" },
-    { code: "fr", label: "🇫🇷 Français" },
-    { code: "es", label: "🇪🇸 Español" }, // Add this line
-  ];
-  ```
-- **Add the new language's slugs to `routeSlugs`**:
-  ```js
-  const routeSlugs: Record<string, Record<string, string>> = {
-    home: { en: "", ko: "", fr: "", es: "" },
-    about: { en: "about", ko: "소개", fr: "a-propos", es: "acerca" },
-    blog: { en: "blog", ko: "블로그", fr: "blog", es: "blog" },
-    tags: { en: "tags", ko: "태그", fr: "tags", es: "etiquetas" },
-  };
-  ```
-  - Make sure to provide the correct slug for each static page in the new language.
-  - The language switcher is automatically updated and will immediately display the new language with the flag
-
----
-
-### **3. Add Content**
-
-- Add your new language content under `/src/pages/es/` (or your new language code), following the same structure as `/en/`, `/ko/`, and `/fr/`.
-
----
-
-### **4. (Optional) Other Components**
-
-If you want to change the default language, open /src/pages/index.astro and change the language folder name accordingly.
-
-```
-return Astro.redirect('/en/');
-```
-
----
-
-**You do NOT need to change any other files if your project is already using the config-driven approach for navigation and language switching.**
-
----
-
-## **Summary Table**
-
-| File/Location                     | What to Update                                  |
-| --------------------------------- | ----------------------------------------------- |
-| `/src/pages/{newlang}/`           | Add new language content (same structure)       |
-| `astro.config.mjs`                | Add new language code to `i18n.locales`         |
-| `src/components/Navigation.astro` | Add to `locales` array and `routeSlugs` mapping |
-| (Optional) Other components       | Only if you have hardcoded language logic       |
-
----
-
-**That’s it!**  
-Add your content, update the config, and your site will support the new language everywhere—including the language switcher and navigation—without further code changes.
-
-Let me know if you want a template for a new language or further automation!
-
-```
-  ---
-  return Astro.redirect('/en/');
-  ---
-```
 
 **DEMO:**  
 https://astro-tutorial-i11n.vercel.app/en/
+
+---
+
+## 🚀 Quick Start
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn
+   ```
+2. **Start the dev server:**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+3. **Open your browser:**
+   Go to [http://localhost:4321](http://localhost:4321) (or the port shown in your terminal).
+4. **Switch languages:**
+   Use the dropdown in the navigation bar to view the site in English, Korean, or French.
+
+---
+
+## 🗂 Project Structure
+
+```
+src/
+  pages/
+    en/        # English content
+    ko/        # Korean content
+    fr/        # French content
+  components/
+    Navigation.astro  # Language switcher and navigation
+  layouts/
+    BaseLayout.astro
+    MarkdownPostLayout.astro
+astro.config.mjs      # Astro config with i18n settings
+```
+
+---
+
+## 🌍 How to Add a New Language
+
+1. **Add your content:**  
+   Copy one of the existing language folders (e.g., `en/`) and translate the files.  
+   Place it in `src/pages/{your-lang-code}/`.
+
+2. **Update the config:**
+
+   - In `astro.config.mjs`, add your language code to the `locales` array.
+   - In `src/components/Navigation.astro`, add your language to the `locales` array and to the `routeSlugs` mapping.
+
+3. **(Optional) Change the default language:**  
+   Edit `src/pages/index.astro` to redirect to your new default language:
+
+   ```js
+   ---
+   return Astro.redirect('/es/');
+   ---
+   ```
+
+4. **Done!**  
+   The language switcher will update automatically.
+
+---
+
+## 🔄 How the Language Switcher Works
+
+- The language switcher in the navigation bar is generated from a config array.
+- When you add a new language to the config, it appears in the dropdown automatically.
+- The switcher always links to the correct page in the selected language (if it exists).
+
+---
+
+## 🛠 Troubleshooting
+
+- **404 when switching languages:**  
+  Make sure you have added the correct slugs for each language in the `routeSlugs` mapping in `Navigation.astro`.
+- **Language not showing in switcher:**  
+  Check that you added your language to the `locales` array in `Navigation.astro` and to the `i18n.locales` array in `astro.config.mjs`.
+
+---
+
+## 📚 Further Reading
+
+- [Astro Tutorial](https://docs.astro.build/en/tutorial/0-introduction/)
+- [Astro Tutorial Code on GitHub](https://github.com/withastro/blog-tutorial-demo)
+
+---
