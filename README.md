@@ -83,3 +83,55 @@ src/
 │   └── MarkdownPostLayout.astro
 astro.config.mjs      # Astro config with i18n settings
 ```
+
+---
+
+## 🌍 How to Add a New Language
+
+1. **Add your content:**  
+   Copy one of the existing language folders (e.g., `en/`) and translate the files.  
+   Place it in `src/pages/{your-lang-code}/`.
+2. **Update the config:**
+
+   - In `astro.config.mjs`, add your language code to the `locales` array.
+   - In `src/components/Navigation.astro`, add your language to the `locales` array and to the `routeSlugs` mapping.
+
+3. **(Optional) Change the default language:**  
+   3-A. Open and edit `src/pages/index.astro` to redirect to your new default language:
+
+   ```js
+   ---
+   return Astro.redirect('/es/');
+   ---
+   ```
+
+   3-B. Clean up the sample language contents and configs in step 1 and 2.
+
+4. **Done!**  
+   The language switcher will update automatically by adding new language names, URLs, and country flags.
+
+---
+
+## 🔄 How the Language Switcher Works
+
+- The language switcher in the navigation bar is generated from a config array.
+- When you add a new language to the config, it appears in the dropdown automatically.
+- The switcher always links to the correct page in the selected language (if it exists).
+
+---
+
+## 🛠 Troubleshooting
+
+- **404 when switching languages:**  
+  Make sure you have added the correct slugs for each language in the `routeSlugs` mapping in `Navigation.astro`.
+- **Language not showing in switcher:**  
+  Check that you added your language to the `locales` array in `Navigation.astro` and to the `i18n.locales` array in `astro.config.mjs`.
+
+---
+
+## 📚 Further Reading
+
+- [Astro Tutorial](https://docs.astro.build/en/tutorial/0-introduction/)
+- [Astro Tutorial Code on GitHub](https://github.com/withastro/blog-tutorial-demo)
+
+---
