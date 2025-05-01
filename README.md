@@ -1,17 +1,20 @@
-# Astro i18n Blog Example
+# Astro Internationalization (i18n) Using Official Astro Tutorial
 
-This project demonstrates how to build a multi-language blog with [Astro](https://astro.build/).
+This project demonstrates how to build a multi-language blog with [Astro](https://astro.build/) in the best possible way.
+
 It supports native URLs, a language switcher, and is easy to extend to new languages.
 
-This is a good starting template for general Astro website like corporate, blog, landing page, etc.
+This is a great starting template for multilingual Astro websites such as corporate sites, blogs, landing pages, and more. Once your project is up and running, start adding styling and Astro islands incrementally.
 
-I believe this is the best possible implementation of intenationalization for an Astro project for both native users and SEO.
+You can easily get your project up and running and add new languages by following the instructions below, or by using them as prompts for AI tools.
+
+I believe this is the best possible implementation of internationalization for an Astro project, both for native users and for SEO.
 
 ---
 
 ## 💡 Strengths of This i18n Implementation
 
-## (and Why This is Better then Astro Official Recipe)
+### (And Why This Is Better Than the Astro Official Recipe)
 
 - **User Experience:**  
   Native users see URLs in their own language (native URL), which is more user-friendly and SEO-friendly.
@@ -36,7 +39,7 @@ I believe this is the best possible implementation of intenationalization for an
 | Default language  | At root, romanized/English slugs | At root, native language slugs          |
 | Slug style        | English/romanized                | Native language                         |
 | Navigation        | English/romanized                | Native language                         |
-| Language switcher | Simple path swap                 | Path mapping, Flag images, Native slugs |
+| Language switcher | Simple path swap                 | Path mapping, flag images, native slugs |
 | Dynamic routes    | English/romanized                | Native language                         |
 
 ---
@@ -60,9 +63,9 @@ https://astro-tutorial-i11n.vercel.app/en/
    # or
    yarn dev
    ```
-3. **Open your browser:**
+3. **Open your browser:**  
    Go to [http://localhost:4321](http://localhost:4321) (or the port shown in your terminal).
-4. **Switch languages:**
+4. **Switch languages:**  
    Use the dropdown in the navigation bar to view the site in English, Korean, or French.
 
 ---
@@ -106,7 +109,7 @@ astro.config.mjs      # Astro config with i18n settings
    ```
 
 4. **Done!**  
-   The language switcher will update automatically.
+   The language switcher will update automatically by adding new language names, URLs, and country flags.
 
 ---
 
