@@ -1,10 +1,10 @@
 # Astro Internationalization (i18n) Using Official Astro Tutorial
 
-This project demonstrates how to build a multi-language blog with [Astro](https://astro.build/) in the best possible way.
+This project demonstrates how to build a multi-language blog with [Astro](https://astro.build/).
 
 It supports native URLs, a language switcher, and is easy to extend to new languages.
 
-This is a great starting template for multilingual Astro websites such as corporate sites, blogs, landing pages, and more. Once your project is up and running, start adding styling and Astro islands incrementally.
+This is a great starting template for multilingual corporate sites, blogs, landing pages, and more. Once your project is up and running, start adding styling and Astro islands incrementally.
 
 You can easily get your project up and running and add new languages by following the instructions below, or by using them as prompts for AI tools.
 
@@ -12,9 +12,7 @@ I believe this is the best possible implementation of internationalization for a
 
 ---
 
-## 💡 Strengths of This i18n Implementation
-
-### (And Why This Is Better Than the Astro Official Recipe)
+## 💡 Strengths of This i18n Implementation (And Why This Is Better Than the Astro Official Recipe)
 
 - **User Experience:**  
   Native users see URLs in their own language (native URL), which is more user-friendly and SEO-friendly.
@@ -93,20 +91,20 @@ astro.config.mjs      # Astro config with i18n settings
 1. **Add your content:**  
    Copy one of the existing language folders (e.g., `en/`) and translate the files.  
    Place it in `src/pages/{your-lang-code}/`.
-
 2. **Update the config:**
 
    - In `astro.config.mjs`, add your language code to the `locales` array.
    - In `src/components/Navigation.astro`, add your language to the `locales` array and to the `routeSlugs` mapping.
 
 3. **(Optional) Change the default language:**  
-   Edit `src/pages/index.astro` to redirect to your new default language:
+   3A. Edit `src/pages/index.astro` to redirect to your new default language:
 
    ```js
    ---
    return Astro.redirect('/es/');
    ---
    ```
+   3B. Clean up the sample language contents and configs in step 1 and 2.
 
 4. **Done!**  
    The language switcher will update automatically by adding new language names, URLs, and country flags.
