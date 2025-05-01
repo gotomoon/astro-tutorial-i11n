@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogPost from "../components/BlogPost.astro";
+const pageTitle = "나의 Astro 학습 블로그";
+const allPosts = Object.values(await import.meta.glob('../글/*.md', { eager: true }));
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <p>여기는 제가 Astro를 배우며 기록하는 블로그입니다.</p>
+  <ul>
+    {allPosts.map((post:any) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
+  </ul>
+</BaseLayout> 

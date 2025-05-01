@@ -5,23 +5,75 @@ const isEnglish = pathname.startsWith("/en");
 const navLinks = isEnglish
   ? [
       { href: "/en/", label: "Home" },
-      { href: "/en/about/", label: "About" },
-      { href: "/en/blog/", label: "Blog" },
-      { href: "/en/tags/", label: "Tags" },
+      { href: "/en/about", label: "About" },
+      { href: "/en/blog", label: "Blog" },
+      { href: "/en/tags", label: "Tags" },
     ]
   : [
-      { href: "/", label: "홈" },
-      { href: "/about/", label: "소개" },
-      { href: "/blog/", label: "블로그" },
-      { href: "/tags/", label: "태그" },
+      { href: "/홈", label: "홈" },
+      { href: "/소개", label: "소개" },
+      { href: "/블로그", label: "블로그" },
+      { href: "/태그/인덱스", label: "태그" },
     ];
 
-const switchLangHref = isEnglish
-  ? pathname.replace(/^\/en/, "") || "/"
-  : "/en" + (pathname === "/" ? "" : pathname);
-const switchLangLabel = isEnglish ? "한국어" : "English";
+const enToKoMap: Record<string, string> = {
+  "/en/": "/홈",
+  "/en/about": "/소개",
+  "/en/blog": "/블로그",
+  "/en/tags": "/태그/인덱스",
+};
+const koToEnMap: Record<string, string> = {
+  "/홈": "/en/",
+  "/소개": "/en/about",
+  "/블로그": "/en/blog",
+  "/태그/인덱스": "/en/tags",
+};
+
+let switchLangHref;
+if (isEnglish) {
+  switchLangHref = enToKoMap[pathname as keyof typeof enToKoMap] || "/홈";
+  if (pathname.startsWith("/en/tags/")) {
+    const tag = pathname.replace("/en/tags/", "");
+    switchLangHref = `/태그/${tag}`;
+  }
+  if (pathname.startsWith("/en/posts/")) {
+    const post = pathname.replace("/en/posts/", "");
+    switchLangHref = `/글/${post}`;
+  }
+} else {
+  switchLangHref = koToEnMap[pathname as keyof typeof koToEnMap] || "/en/";
+  if (pathname.startsWith("/태그/")) {
+    const tag = pathname.replace("/태그/", "");
+    switchLangHref = `/en/tags/${tag}`;
+  }
+  if (pathname.startsWith("/글/")) {
+    const post = pathname.replace("/글/", "");
+    switchLangHref = `/en/posts/${post}`;
+  }
+}
+
+const switchLangLabel = isEnglish ? "🇰🇷 한국어" : "🇺🇸 English";
+const githubUrl = "https://github.com/gotomoon/astro-tutorial-i11n";
 ---
+<style>
+  .github-btn {
+    margin-left: 1em;
+    padding: 0.4em 1em;
+    background: #24292f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+  .github-btn:hover {
+    background: #57606a;
+  }
+</style>
 <div class="nav-links">
   {navLinks.map(link => <a href={link.href}>{link.label}</a>)}
   <a href={switchLangHref} style="margin-left:1em;font-weight:bold;">{switchLangLabel}</a>
+  <a href={githubUrl} class="github-btn" target="_blank" rel="noopener noreferrer">Github Source</a>
 </div>

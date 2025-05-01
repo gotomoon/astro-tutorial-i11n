@@ -4,7 +4,7 @@ import BlogPost from "../../components/BlogPost.astro";
 
 export async function getStaticPaths() {
   const allPosts = Object.values(
-    import.meta.glob("../posts/*.md", { eager: true })
+    import.meta.glob("../글/*.md", { eager: true })
   );
 
   const uniqueTags = [
@@ -35,4 +35,4 @@ const { posts } = Astro.props;
       ))
     }
   </ul>
-</BaseLayout>
+</BaseLayout> 

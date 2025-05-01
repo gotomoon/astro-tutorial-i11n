@@ -10,4 +10,17 @@ If you completed or familiar with the official tutorial, this project should get
 
 This project is a biliangual website with Korean as the default language and English as the second language. However, you should be able to add and change the languages easily.
 
+- Lanuage switcher that just works
+- Localized slugs (Localized URLs) to maximize SEO
+  (including Unicode handling of Chinese, Japanese, and Korean characters)
+
+| Language | URL                          |
+| -------- | ---------------------------- |
+| English  | `example.com/about`          |
+| Korean   | `example.com/소개`           |
+| Chinese  | `example.com/介绍`           |
+| Japanese | `example.com/紹介`           |
+| Spanish  | `example.com/sobre-nosotros` |
+| French   | `example.com/a-propos`       |
+
 **DEMO: https://astro-tutorial-i11n.vercel.app/en/**

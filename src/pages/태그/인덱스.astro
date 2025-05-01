@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 const allPosts = Object.values(
-  import.meta.glob("../posts/*.md", { eager: true })
+  import.meta.glob("../글/*.md", { eager: true })
 );
 const tags = [
   ...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat()),
@@ -14,7 +14,7 @@ const pageTitle = "태그 인덱스";
     {
       tags.map((tag) => (
         <p class="tag">
-          <a href={`/tags/${tag}`}>{tag}</a>
+          <a href={`/태그/${tag}`}>{tag}</a>
         </p>
       ))
     }
@@ -38,4 +38,4 @@ const pageTitle = "태그 인덱스";
     font-size: 1.15em;
     background-color: #f8fcfd;
   }
-</style>
+</style> 
