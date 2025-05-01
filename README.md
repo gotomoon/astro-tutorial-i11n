@@ -1,34 +1,23 @@
-# Astro Internalization Implementation on Astro Official Tutorial Blog Project"
+# Astro Internationalization Implementation on Astro Official Tutorial Blog Project
 
-This is internalization implementation of the Astro official tutorial.
+This is an internationalization implementation of the Astro official tutorial.
 
 - [Astro Tutorial](https://docs.astro.build/en/tutorial/0-introduction/)
+- [Astro Tutorial Code on GitHub](https://github.com/withastro/blog-tutorial-demo)
 
-- [Astro Tutorial Code in Github](https://github.com/withastro/blog-tutorial-demo).
+If you have completed or are familiar with the official tutorial, this project will help you get started with internationalization quickly.
 
-If you completed or familiar with the official tutorial, this project should get you started with internationalization fast.
+---
 
-This project is a biliangual website with Korean as the default language and English as the second language. However, you should be able to add and change the languages easily.
+## Strengths of This i18n Implementation
 
-# Strengths of This i18n Implementation
+### Why is this better than the Astro Official Internationalization Recipe?
 
-## Why is this better than Astro Official Internationalization Recipe?
+I believe this approach provides the best possible experience for native users and the best implementation for SEO, for the following reasons:
 
-I believe this is the best possible experience for native users and the best implementation for SEO for following reasons.
-
-- User experience: Native users see URLs in their own language (native URL), which is more user-friendly
-- SEO
-  Native slugs can improve SEO for native search terms.
-- Customization:
-  This is a truly bilingual site with native experience for both languages, not just a translation of English slugs.
-- Full content localization: Each language can have fully independent content. This is very important because each native people notice subtle atmosphere of a page versus cookie cutter translation. This is crucial especially for marketing websites.
-- Dynamic routing: Works for both static and dynamic pages (tags, posts).
-- No external dependencies: Simple, maintainable, and easy to extend.
-- Astro Flexibility:
-  Astro’s file-based routing allows for this flexibility, even though the official recipe uses romanized slugs for simplicity and universality.
-- Lanuage switcher that just works
-- Localized slugs (Localized URLs): users see URLs in their own language, which is user-friendly and maximizes SEO like the table below.
-  (including Unicode handling of Chinese, Japanese, and Korean characters)
+- **User Experience:**  
+  Native users see URLs in their own language (native URL), which is more user-friendly, as shown in the table below.  
+  (Including Unicode handling of Chinese, Japanese, and Korean characters.)
 
 | Language | URL                          |
 | -------- | ---------------------------- |
@@ -39,18 +28,44 @@ I believe this is the best possible experience for native users and the best imp
 | Spanish  | `example.com/sobre-nosotros` |
 | French   | `example.com/a-propos`       |
 
-**Key Differences between Astro Official Recipe**
-| Aspect | Astro Official Recipe | This Project |
-|-----------------------|--------------------------------------|-------------------------------------|
-| Default language | At root, romanized/English slugs | At root, native language slugs |
-| Other languages | In subfolders (e.g., /en/, /fr/) | In /en/ subfolder |
-| Slug style | English/romanized | Native language |
-| Navigation | English/romanized | Native (English for /en)|
-| Language switcher | Simple path swap | Path mapping, supports native slugs |
-| Dynamic routes | English/romanized | Native (English for /en)|
+- **SEO:**  
+  Native slugs can improve SEO for native search terms.
 
-**Summary Table of Implementation**
-Use below as a reference to customize for your language.
+- **Customization:**  
+  This is a truly bilingual site with a native experience for both languages, not just a translation of English slugs.
+
+- **Full Content Localization:**  
+  Each language can have fully independent content. This is very important because native speakers notice subtle differences in the atmosphere of a page versus a cookie-cutter translation. This is crucial, especially for marketing websites.
+
+- **Dynamic Routing:**  
+  Works for both static and dynamic pages (tags, posts).
+
+- **No External Dependencies:**  
+  Simple, maintainable, and easy to extend.
+
+- **Astro Flexibility:**  
+  Astro's file-based routing allows for this flexibility, even though the official recipe uses romanized slugs for simplicity and universality.
+
+- **Language Switcher That Just Works**
+
+---
+
+### Key Differences Between Astro Official Recipe and This Project
+
+| Aspect            | Astro Official Recipe            | This Project                        |
+| ----------------- | -------------------------------- | ----------------------------------- |
+| Default language  | At root, romanized/English slugs | At root, native language slugs      |
+| Other languages   | In subfolders (e.g., /en/, /fr/) | In /en/ subfolder                   |
+| Slug style        | English/romanized                | Native language                     |
+| Navigation        | English/romanized                | Native (English for /en)            |
+| Language switcher | Simple path swap                 | Path mapping, supports native slugs |
+| Dynamic routes    | English/romanized                | Native (English for /en)            |
+
+---
+
+### Summary Table of Implementation
+
+Use the table below as a reference to customize for your language.
 
 | Feature            | Korean (default)          | English (secondary)      |
 | ------------------ | ------------------------- | ------------------------ |
@@ -62,4 +77,7 @@ Use below as a reference to customize for your language.
 | Layouts/components | Shared                    | Shared                   |
 | SEO/lang attribute | Dynamic                   | Dynamic                  |
 
-**DEMO: https://astro-tutorial-i11n.vercel.app/en/**
+---
+
+**DEMO:**  
+https://astro-tutorial-i11n.vercel.app/en/
