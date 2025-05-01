@@ -1,6 +1,6 @@
 # Astro Internalization Implementation on Astro Official Tutorial Blog Project"
 
-This is internalization implementation of the project, [Astro Tutorial](https://docs.astro.build/en/tutorial/0-introduction/).
+This is internalization implementation of the Astro official tutorial, [Astro Tutorial](https://docs.astro.build/en/tutorial/0-introduction/).
 
 If you completed or familiar with the official tutorial, this project should get you started with internationalization fast.
 
