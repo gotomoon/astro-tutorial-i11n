@@ -1,0 +1,73 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pageTitle = "소개";
+const happy = true;
+const finished = true;
+const goal = 3;
+
+const identity = {
+  firstName: "Sarah",
+  country: "캐나다",
+  occupation: "기술 작가",
+  hobbies: ["사진 촬영", "조류 관찰", "야구"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "문서 작성"];
+
+const skillColor = "navy";
+const fontWeight = "bold";
+const textCase = "uppercase";
+---
+
+<style define:vars={{ skillColor, fontWeight, textCase }}>
+  h1 {
+    color: purple;
+    font-size: 4rem;
+  }
+  .skill {
+    color: var(--skillColor);
+    font-weight: var(--fontWeight);
+    text-transform: var(--textCase);
+  }
+</style>
+
+<BaseLayout pageTitle={pageTitle}>
+  <h2>... 그리고 저의 새로운 Astro 사이트!</h2>
+
+  <p>
+    저는 Astro의 입문 튜토리얼을 따라가고 있습니다. 이 페이지는 제 웹사이트의 두 번째 페이지이며, 제가 직접 만든 첫 번째 페이지입니다!
+  </p>
+
+  <p>
+    튜토리얼을 더 완성할수록 이 사이트도 업데이트될 예정이니, 계속 방문해서 저의 여정을 지켜봐 주세요!
+  </p>
+
+  {happy && <p>Astro를 배우게 되어 기쁩니다!</p>}
+
+  {finished && <p>이 튜토리얼을 완료했습니다!</p>}
+
+  {
+    goal === 3 ? (
+      <p>제 목표는 3일 안에 끝내는 것입니다.</p>
+    ) : (
+      <p>제 목표는 3일이 아닙니다.</p>
+    )
+  }
+
+  <p>저에 대한 몇 가지 사실입니다:</p>
+  <ul>
+    <li>제 이름은 {identity.firstName}입니다.</li>
+    <li>{identity.country}에 살고 있으며, {identity.occupation}로 일하고 있습니다.</li>
+    {
+      identity.hobbies.length >= 2 && (
+        <li>
+          저의 취미 두 가지는: {identity.hobbies[0]} 그리고 {identity.hobbies[1]}
+        </li>
+      )
+    }
+  </ul>
+  <p>저의 기술은 다음과 같습니다:</p><p></p><ul>
+    {skills.map((skill) => <li class="skill">{skill}</li>)}
+  </ul>
+</BaseLayout>

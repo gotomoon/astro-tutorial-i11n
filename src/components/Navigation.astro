@@ -1,0 +1,27 @@
+---
+const pathname = Astro.url.pathname || "/";
+const isEnglish = pathname.startsWith("/en");
+
+const navLinks = isEnglish
+  ? [
+      { href: "/en/", label: "Home" },
+      { href: "/en/about/", label: "About" },
+      { href: "/en/blog/", label: "Blog" },
+      { href: "/en/tags/", label: "Tags" },
+    ]
+  : [
+      { href: "/", label: "홈" },
+      { href: "/about/", label: "소개" },
+      { href: "/blog/", label: "블로그" },
+      { href: "/tags/", label: "태그" },
+    ];
+
+const switchLangHref = isEnglish
+  ? pathname.replace(/^\/en/, "") || "/"
+  : "/en" + (pathname === "/" ? "" : pathname);
+const switchLangLabel = isEnglish ? "한국어" : "English";
+---
+<div class="nav-links">
+  {navLinks.map(link => <a href={link.href}>{link.label}</a>)}
+  <a href={switchLangHref} style="margin-left:1em;font-weight:bold;">{switchLangLabel}</a>
+</div>
