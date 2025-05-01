@@ -7,4 +7,11 @@ import preact from "@astrojs/preact";
 export default defineConfig({
   site: "https://example.com",
   integrations: [preact()],
+  i18n: {
+    locales: ["en", "ko", "fr"],
+    defaultLocale: "en",
+    routing: {
+      prefixDefaultLocale: true,
+    },
+  },
 });

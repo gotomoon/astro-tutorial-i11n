@@ -79,5 +79,93 @@ Use the table below as a reference to customize for your language.
 
 ---
 
+# Instruction
+
+To add a new language (e.g., Spanish, "es") to your Astro project, you only need to update a few configuration/code files after adding your new content under `/src/pages/es/`:
+
+---
+
+### **1. `astro.config.mjs`**
+
+- Add the new language code to the `i18n.locales` array:
+  ```js
+  i18n: {
+    locales: ["en", "ko", "fr", "es"], // Add "es"
+    defaultLocale: "en",
+    routing: {
+      prefixDefaultLocale: true,
+    },
+  },
+  ```
+
+---
+
+### **2. `src/components/Navigation.astro`**
+
+- **Add the new language to the `locales` array**:
+  ```js
+  const locales = [
+    { code: "en", label: "🇺🇸 English" },
+    { code: "ko", label: "🇰🇷 한국어" },
+    { code: "fr", label: "🇫🇷 Français" },
+    { code: "es", label: "🇪🇸 Español" }, // Add this line
+  ];
+  ```
+- **Add the new language's slugs to `routeSlugs`**:
+  ```js
+  const routeSlugs: Record<string, Record<string, string>> = {
+    home: { en: "", ko: "", fr: "", es: "" },
+    about: { en: "about", ko: "소개", fr: "a-propos", es: "acerca" },
+    blog: { en: "blog", ko: "블로그", fr: "blog", es: "blog" },
+    tags: { en: "tags", ko: "태그", fr: "tags", es: "etiquetas" },
+  };
+  ```
+  - Make sure to provide the correct slug for each static page in the new language.
+  - The language switcher is automatically updated and will immediately display the new language with the flag
+
+---
+
+### **3. Add Content**
+
+- Add your new language content under `/src/pages/es/` (or your new language code), following the same structure as `/en/`, `/ko/`, and `/fr/`.
+
+---
+
+### **4. (Optional) Other Components**
+
+If you want to change the default language, open /src/pages/index.astro and change the language folder name accordingly.
+
+```
+return Astro.redirect('/en/');
+```
+
+---
+
+**You do NOT need to change any other files if your project is already using the config-driven approach for navigation and language switching.**
+
+---
+
+## **Summary Table**
+
+| File/Location                     | What to Update                                  |
+| --------------------------------- | ----------------------------------------------- |
+| `/src/pages/{newlang}/`           | Add new language content (same structure)       |
+| `astro.config.mjs`                | Add new language code to `i18n.locales`         |
+| `src/components/Navigation.astro` | Add to `locales` array and `routeSlugs` mapping |
+| (Optional) Other components       | Only if you have hardcoded language logic       |
+
+---
+
+**That’s it!**  
+Add your content, update the config, and your site will support the new language everywhere—including the language switcher and navigation—without further code changes.
+
+Let me know if you want a template for a new language or further automation!
+
+```
+  ---
+  return Astro.redirect('/en/');
+  ---
+```
+
 **DEMO:**  
 https://astro-tutorial-i11n.vercel.app/en/

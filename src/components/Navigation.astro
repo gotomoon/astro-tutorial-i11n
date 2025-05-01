@@ -1,58 +1,66 @@
 ---
-const pathname = Astro.url.pathname || "/";
-const isEnglish = pathname.startsWith("/en");
-
-const navLinks = isEnglish
-  ? [
-      { href: "/en/", label: "Home" },
-      { href: "/en/about", label: "About" },
-      { href: "/en/blog", label: "Blog" },
-      { href: "/en/tags", label: "Tags" },
-    ]
-  : [
-      { href: "/홈", label: "홈" },
-      { href: "/소개", label: "소개" },
-      { href: "/블로그", label: "블로그" },
-      { href: "/태그/인덱스", label: "태그" },
-    ];
-
-const enToKoMap: Record<string, string> = {
-  "/en/": "/홈",
-  "/en/about": "/소개",
-  "/en/blog": "/블로그",
-  "/en/tags": "/태그/인덱스",
+// i18n config (could be imported from a separate file)
+const locales = [
+  { code: "en", label: "🇺🇸 English" },
+  { code: "ko", label: "🇰🇷 한국어" },
+  { code: "fr", label: "🇫🇷 Français" },
+];
+const routeSlugs: Record<string, Record<string, string>> = {
+  home:   { en: "", ko: "", fr: "" },
+  about:  { en: "about", ko: "소개", fr: "a-propos" },
+  blog:   { en: "blog", ko: "블로그", fr: "blog" },
+  tags:   { en: "tags", ko: "태그", fr: "tags" },
 };
-const koToEnMap: Record<string, string> = {
-  "/홈": "/en/",
-  "/소개": "/en/about",
-  "/블로그": "/en/blog",
-  "/태그/인덱스": "/en/tags",
-};
-
-let switchLangHref;
-if (isEnglish) {
-  switchLangHref = enToKoMap[pathname as keyof typeof enToKoMap] || "/홈";
-  if (pathname.startsWith("/en/tags/")) {
-    const tag = pathname.replace("/en/tags/", "");
-    switchLangHref = `/태그/${tag}`;
-  }
-  if (pathname.startsWith("/en/posts/")) {
-    const post = pathname.replace("/en/posts/", "");
-    switchLangHref = `/글/${post}`;
-  }
-} else {
-  switchLangHref = koToEnMap[pathname as keyof typeof koToEnMap] || "/en/";
-  if (pathname.startsWith("/태그/")) {
-    const tag = pathname.replace("/태그/", "");
-    switchLangHref = `/en/tags/${tag}`;
-  }
-  if (pathname.startsWith("/글/")) {
-    const post = pathname.replace("/글/", "");
-    switchLangHref = `/en/posts/${post}`;
-  }
+function getPath(route: string, locale: string): string {
+  const slug = routeSlugs[route as keyof typeof routeSlugs][locale as keyof typeof routeSlugs[typeof route]];
+  return `/${locale}${slug ? '/' + slug : ''}`;
 }
 
-const switchLangLabel = isEnglish ? "🇰🇷 한국어" : "🇺🇸 English";
+const pathname = Astro.url.pathname || "/";
+const segments = pathname.split('/').filter(Boolean);
+const currentLocale = segments[0] ?? "en";
+
+const navLinks = [
+  { route: "home", label: { en: "Home", ko: "홈", fr: "Accueil" } },
+  { route: "about", label: { en: "About", ko: "소개", fr: "À propos" } },
+  { route: "blog", label: { en: "Blog", ko: "블로그", fr: "Blog" } },
+  { route: "tags", label: { en: "Tags", ko: "태그", fr: "Tags" } },
+].map(link => ({
+  href: getPath(link.route, currentLocale),
+  label: link.label[currentLocale as keyof typeof link.label],
+}));
+
+const staticRoutes = Object.keys(routeSlugs);
+
+const staticPathToRoute: Record<string, string> = {};
+Object.keys(routeSlugs).forEach(routeKey => {
+  Object.entries(routeSlugs[routeKey]).forEach(([lang, slug]) => {
+    const path = `/${lang}${slug ? '/' + slug : ''}`;
+    staticPathToRoute[path] = routeKey;
+  });
+});
+
+const decodedPathname = decodeURIComponent(pathname);
+const currentStaticRoute = staticPathToRoute[decodedPathname];
+
+const languageLinks = locales.map(l => {
+  let href;
+  if (l.code === currentLocale) {
+    href = pathname;
+  } else if (currentStaticRoute) {
+    href = getPath(currentStaticRoute, l.code);
+  } else {
+    // Fallback: dynamic route, swap prefix and keep rest
+    href = `/${l.code}/${segments.slice(1).join('/')}`;
+  }
+  return {
+    code: l.code,
+    label: l.label,
+    href,
+    isCurrent: l.code === currentLocale,
+  };
+});
+
 const githubUrl = "https://github.com/gotomoon/astro-tutorial-i11n";
 ---
 <style>
@@ -71,9 +79,23 @@ const githubUrl = "https://github.com/gotomoon/astro-tutorial-i11n";
   .github-btn:hover {
     background: #57606a;
   }
+  .lang-dropdown {
+    margin-left: 1em;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 0.3em 0.7em;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background: #fff;
+    color: #222;
+  }
 </style>
 <div class="nav-links">
   {navLinks.map(link => <a href={link.href}>{link.label}</a>)}
-  <a href={switchLangHref} style="margin-left:1em;font-weight:bold;">{switchLangLabel}</a>
+  <select class="lang-dropdown" value={currentLocale} onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href')">
+    {languageLinks.map(l => (
+      <option value={l.code} selected={l.isCurrent} data-href={l.href}>{l.label}</option>
+    ))}
+  </select>
   <a href={githubUrl} class="github-btn" target="_blank" rel="noopener noreferrer">Github Source</a>
 </div>

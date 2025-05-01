@@ -1,8 +1,8 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import BlogPost from "../components/BlogPost.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogPost from "../../components/BlogPost.astro";
 const pageTitle = "나의 Astro 학습 블로그";
-const allPosts = Object.values(await import.meta.glob('../글/*.md', { eager: true }));
+const allPosts = Object.values(await import.meta.glob('./블로그/*.md', { eager: true }));
 ---
 
 <BaseLayout pageTitle={pageTitle}>

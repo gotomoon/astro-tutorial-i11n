@@ -1,12 +1,12 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
 const allPosts = Object.values(
-  import.meta.glob("../글/*.md", { eager: true })
+  import.meta.glob("../posts/*.md", { eager: true })
 );
 const tags = [
   ...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat()),
 ];
-const pageTitle = "태그 인덱스";
+const pageTitle = "Index des tags";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -14,7 +14,7 @@ const pageTitle = "태그 인덱스";
     {
       tags.map((tag) => (
         <p class="tag">
-          <a href={`/태그/${tag}`}>{tag}</a>
+          <a href={`/fr/tags/${tag}`}>{tag}</a>
         </p>
       ))
     }

@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 const { frontmatter } = Astro.props;
+const pathname = Astro.url.pathname || "/";
+const isKorean = pathname.startsWith("/ko/");
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
@@ -15,7 +17,7 @@ const { frontmatter } = Astro.props;
     {
       frontmatter.tags.map((tag: string) => (
         <p class="tag">
-          <a href={`/tags/${tag}`}>{tag}</a>
+          <a href={`${isKorean ? "/ko/태그/" : "/en/tags/"}${tag}`}>{tag}</a>
         </p>
       ))
     }
