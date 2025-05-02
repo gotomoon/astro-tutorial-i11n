@@ -135,3 +135,17 @@ astro.config.mjs      # Astro config with i18n settings
 - [Astro Tutorial Code on GitHub](https://github.com/withastro/blog-tutorial-demo)
 
 ---
+
+## 📝 License & Contributions
+
+This project is available for educational purposes. While the code is public and can be cloned, all rights to the original source code remain with the author.
+
+If you'd like to contribute improvements:
+
+1. Fork the repository
+2. Create your changes in your fork
+3. Submit a pull request for review
+
+Direct pushes to this repository are not permitted without explicit authorization.
+
+---
